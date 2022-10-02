@@ -1,0 +1,8 @@
+.square {
+    border-radius: 0px;
+}
+
+.jumbotron {
+    color: aliceblue;
+    background-image: linear-gradient(to right, #0F88DD, #181A18);
+} 
