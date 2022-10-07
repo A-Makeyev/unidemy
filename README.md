@@ -1,2 +1,2 @@
-# edemy
+# unidemy
 udemy clone 
