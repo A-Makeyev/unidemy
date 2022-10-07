@@ -1,4 +1,4 @@
-import fs from 'fs'
+import { readdirSync } from 'fs'
 import express from 'express'
 import cors from 'cors'
 
@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 // routes
-fs.readdirSync('./routes').map((route) => 
+readdirSync('./routes').map((route) => 
     app.use('/api', require(`./routes/${route}`))
 )
 

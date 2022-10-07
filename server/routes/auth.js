@@ -1,7 +1,8 @@
+import { register } from '../controllers/auth'
 import express from 'express'
 
-const router = express.Router('/register', (req, res) => {
-    res.send('<h1 style="text-align: center;">amir register asd asd</h1>')
-})
+const router = express.Router()
+
+router.get('/register', register)
 
 module.exports = router
