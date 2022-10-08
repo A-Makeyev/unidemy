@@ -9,7 +9,7 @@ const app = express()
 
 // database
 mongoose.connect(process.env.DATABASE).then(() => {
-    console.log('>>> Successfully connected to MongoDB')
+    console.log('>>> Connected to MongoDB')
 }).catch((error) => {
     console.log('>>> There was an error connecting to MongoDB:', error)
 })
@@ -34,5 +34,5 @@ readdirSync('./routes').map((route) => {
 // port
 const port = process.env.PORT || 8000
 app.listen(port, () => {
-    console.log(`>>> Server is running on http://localhost:${port}`)
+    console.log(`>>> Server is up and running on: http://localhost:${port}`)
 })
