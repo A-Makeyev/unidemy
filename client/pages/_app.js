@@ -11,16 +11,17 @@ function App ({ Component, pageProps }) {
             <TopNav />
             <Component { ...pageProps } />
             <ToastContainer
-                position='top-center'
-                autoClose={3000}
                 hideProgressBar={false}
+                position="top-center"
                 newestOnTop={false}
-                closeOnClick
-                rtl={false}
                 pauseOnFocusLoss
-                draggable
+                autoClose={3000}
+                theme="colored"
+                closeOnClick
                 pauseOnHover
-                theme='colored'
+                rtl={false}
+                draggable
+                limit={1}
             />
         </>
     )

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import  { toast } from 'react-toastify'
 import { SyncOutlined } from '@ant-design/icons'
+import Link from 'next/link'
 import axios from 'axios'
 
 const Register = () => {
@@ -9,14 +10,11 @@ const Register = () => {
     const [ password, setPassword ] = useState('')
     const [ loading, setLoading ] = useState(false)
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    const handleSubmit = async (event) => {
+        event.preventDefault()
         try {
             setLoading(true)
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
-                name, email, password
-            })
-            // console.log('Register response:', data)
+            const { data } = await axios.post('api/register', { name, email, password })
             toast.success(`Welcome ${name}, you have been successfully registered!`)
             setLoading(false)
         } catch(error) {
@@ -28,38 +26,45 @@ const Register = () => {
     return (
         <>
             <h1 className="jumbotron text-center bg-primary square">Register</h1>
-            <div className="container col-md-4 offset-md-4 pb-5">
+            <div className="container col-md-4 offset-md-4 pb-4">
                 <form onSubmit={handleSubmit}>
                     <input type="text"
                         placeholder="Name"
-                        className="form-control mb-4 p-4"
-                        onChange={e => setName(e.target.value)}
+                        className="form-control mb-4 p-2"
+                        onChange={event => setName(event.target.value)}
                         value={name} 
                         required
                     />
 
                     <input type="email"
                         placeholder="Email"
-                        className="form-control mb-4 p-4"
-                        onChange={e => setEmail(e.target.value)}
+                        className="form-control mb-4 p-2"
+                        onChange={event => setEmail(event.target.value)}
                         value={email} 
                         required
                     />
 
                     <input type="password"
                         placeholder="Password"
-                        className="form-control mb-4 p-4"
-                        onChange={e => setPassword(e.target.value)}
+                        className="form-control mb-4 p-2"
+                        onChange={event => setPassword(event.target.value)}
                         value={password} 
                         required
                     />
 
                     <button type="submit" 
-                            className="btn btn-primary" 
+                            className="form-control btn btn-primary" 
                             disabled={!name || !email || !password || loading}>
                             { loading ? <SyncOutlined spin /> : 'Submit'}
                     </button>   
                 </form>
+
+                <p className="text-center p-3">
+                    Already registered? {''}
+                    <Link href="/login">
+                        <a>Login</a>
+                    </Link>
+                </p>
             </div>
         </>
     )
