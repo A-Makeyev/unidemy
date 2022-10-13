@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import  { toast } from 'react-toastify'
 import { SyncOutlined } from '@ant-design/icons'
+import { Context } from '../context'
 import Link from 'next/link'
 import axios from 'axios'
 
@@ -9,11 +10,19 @@ const Login = () => {
     const [ password, setPassword ] = useState('')
     const [ loading, setLoading ] = useState(false)
 
+    const { state, dispatch } = useContext(Context)
+    console.log('state', state)
+
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
             setLoading(true)
             const { data } = await axios.post('api/login', { email, password })
+
+            dispatch({
+                type: 'LOGIN',
+                payload: data
+            })
 
             toast.success(`Welcome back ${data.name}!`)
             setLoading(false)
@@ -54,7 +63,7 @@ const Login = () => {
                 <p className="text-center p-3">
                     Not registered yet? {''}
                     <Link href="/register">
-                        <a>Login</a>
+                        <a>Register</a>
                     </Link>
                 </p>
             </div>
