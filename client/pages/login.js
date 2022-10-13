@@ -15,8 +15,7 @@ const Login = () => {
             setLoading(true)
             const { data } = await axios.post('api/login', { email, password })
 
-            console.log('login:', data)
-            toast.success(`You have been successfully loged in!`)
+            toast.success(`Welcome back ${data.name}!`)
             setLoading(false)
         } catch(error) {
             toast.error(error.response.data)

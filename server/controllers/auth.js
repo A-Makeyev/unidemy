@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken'
 import User from '../models/user'
 import { encryptPassword, comparePasswords } from '../utils/auth' 
 
@@ -27,3 +28,26 @@ import { encryptPassword, comparePasswords } from '../utils/auth'
         return response.status(400).send(error)
     }
 } 
+
+export const login = async (request, response) => {
+    try {
+        const { email, password } = request.body
+        const user = await User.findOne({ email }).exec()
+        if (!user) return response.status(400).send(`User with an email address ${email} was not found`)
+
+        const passwordsMatch = await comparePasswords(password, user.password)
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' })
+
+        user.password = undefined
+        response.cookie('token', token, { 
+            httpOnly: true,
+            // secure: true 
+        })
+
+        response.json(user)
+
+    } catch (error) {
+        console.log(error)
+        return response.status(400).send(error)
+    }
+}
