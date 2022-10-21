@@ -34,5 +34,5 @@ readdirSync('./routes').map((route) => {
 // port
 const port = process.env.PORT || 8000
 app.listen(port, () => {
-    console.log(`>>> Server is up and running on: http://localhost:${port}`)
+    console.log(`%c>>> Server is up and running on: http://localhost:${port}`)
 })

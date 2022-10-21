@@ -23,7 +23,7 @@ app.prepare().then(() => {
 
     server.listen(3000, (error) => {
         if (error) throw error
-        console.log('>>> Server is up and running on: http://localhost:3000')
+        console.log('>>> Client is live on: http://localhost:3000')
     })
 
 }).catch((error) => {
