@@ -51,3 +51,13 @@ export const login = async (request, response) => {
         return response.status(400).send(error)
     }
 }
+
+export const logout = async (request, response) => {
+    try {
+        response.clearCookie('token')
+        return response.json({ message: 'Logged out'})
+    } catch(error) {
+        console.log(error)
+        return response.status(400).send(error)
+    }
+}
