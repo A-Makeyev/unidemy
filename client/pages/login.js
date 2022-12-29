@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react'
-import  { toast } from 'react-toastify'
 import { SyncOutlined } from '@ant-design/icons'
+import  { toast } from 'react-toastify'
+import { useRouter } from 'next/router'
 import { Context } from '../context'
 import Link from 'next/link'
 import axios from 'axios'
@@ -11,7 +12,7 @@ const Login = () => {
     const [ loading, setLoading ] = useState(false)
 
     const { state, dispatch } = useContext(Context)
-    console.log('state', state)
+    const router = useRouter()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -24,8 +25,12 @@ const Login = () => {
                 payload: data
             })
 
-            toast.success(`Welcome back ${data.name}!`)
+            window.localStorage.setItem('user', JSON.stringify(data))
+            router.push('/')
             setLoading(false)
+            setTimeout(() => {
+                toast.success(`Welcome back ${data.name}!`)
+            }, 500)
         } catch(error) {
             toast.error(error.response.data)
             setLoading(false)

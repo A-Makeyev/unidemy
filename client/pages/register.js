@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import  { toast } from 'react-toastify'
 import { SyncOutlined } from '@ant-design/icons'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import axios from 'axios'
 
@@ -9,14 +10,18 @@ const Register = () => {
     const [ email, setEmail ] = useState('')
     const [ password, setPassword ] = useState('')
     const [ loading, setLoading ] = useState(false)
+    const router = useRouter()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
             setLoading(true)
             const { data } = await axios.post('api/register', { name, email, password })
-            toast.success(`Welcome ${name}, you have been successfully registered!`)
+            router.push('/login')
             setLoading(false)
+            setTimeout(() => {
+                toast.success(`Welcome ${name}, you have been successfully registered!`)
+            }, 500)
         } catch(error) {
             toast.error(error.response.data)
             setLoading(false)
