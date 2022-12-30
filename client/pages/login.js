@@ -25,9 +25,11 @@ const Login = () => {
                 payload: data
             })
 
+            // save locally
             window.localStorage.setItem('user', JSON.stringify(data))
-            router.push('/')
+            toast.success(`Welcome back ${data.name}!`)
             setLoading(false)
+            router.push('/')
             setTimeout(() => {
                 toast.success(`Welcome back ${data.name}!`)
             }, 500)

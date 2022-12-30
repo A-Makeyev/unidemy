@@ -18,13 +18,12 @@ function App ({ Component, pageProps }) {
                     position="top-center"
                     newestOnTop={false}
                     pauseOnFocusLoss
-                    autoClose={3000}
-                    theme="colored"
+                    autoClose={2000}
+                    theme="light"
                     closeOnClick
                     pauseOnHover
                     rtl={false}
                     draggable
-                    limit={1}
                 />
             </Provider>
         </React.StrictMode>

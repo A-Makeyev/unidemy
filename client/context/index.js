@@ -18,13 +18,13 @@ const rootReducer = (state, action) => {
 
 const Provider = ({ children }) => {
     const [ state, dispatch ] = useReducer(rootReducer, initialState)
-
+    
     useEffect(() => {
         dispatch({
             type: 'LOGIN',
             payload: JSON.parse(window.localStorage.getItem('user'))
         })
-    }, [])  
+    }, [])
 
     return (
         <Context.Provider value={{state, dispatch}}>
